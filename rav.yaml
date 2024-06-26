@@ -5,6 +5,8 @@ scripts:
     - cd src && python manage.py makemigrations
   migrate:
     - cd src && python manage.py migrate
+  shell:
+    - cd src && python manage.py shell
   curl_auth: |
     curl -X POST -H "Content-Type: application/json" -d '{"username": "cfe", "password": "learncode"}' http://127.0.0.1:8001/api/token/pair
   curl_protect: |
