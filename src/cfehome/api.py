@@ -1,3 +1,4 @@
+import helpers
 from ninja import NinjaAPI, Schema
 
 from ninja_extra import NinjaExtraAPI
@@ -19,6 +20,8 @@ def hello(request):
     print(request)
     return {"message":"Hello World"}
 
-@api.get("/me", response=UserSchema, auth=JWTAuth())
+@api.get("/me", 
+    response=UserSchema, 
+    auth=helpers.api_auth_user_required)
 def me(request):
     return request.user
