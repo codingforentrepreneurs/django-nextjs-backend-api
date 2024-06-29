@@ -17,7 +17,7 @@ class UserSchema(Schema):
 
 @api.get("/hello")
 def hello(request):
-    print(request)
+    # print(request)
     return {"message":"Hello World"}
 
 @api.get("/me", 
