@@ -37,13 +37,21 @@ pip install pip --upgrade
 pip install -r requirements.txt
 ```
 
+Copy default env
+```bash
+cp .env.sample .env
+```
+
 Run project
 
 ```bash
 # Using the Rav CLI: https://github.com/jmitchel3/rav
 rav run server
 
+
 # or directly with django
 cd src
 python manage.py runserver 8001
 ```
+
+
