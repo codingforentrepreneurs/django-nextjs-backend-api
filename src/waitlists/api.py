@@ -12,7 +12,8 @@ from .schemas import (
     WaitlistEntryCreateSchema, 
     WaitlistEntryListSchema, 
     WaitlistEntryDetailSchema,
-    ErrorWaitlistEntryCreateSchema
+    ErrorWaitlistEntryCreateSchema,
+    WaitlistEntryUpdateSchema
 )
 
 router = Router()
@@ -54,4 +55,19 @@ def get_wailist_entry(request, entry_id:int):
         WaitlistEntry, 
         id=entry_id,
         user=request.user)
+    return obj
+
+@router.put("{entry_id}/", response=WaitlistEntryDetailSchema, auth=helpers.api_auth_user_required)
+def update_wailist_entry(request, 
+    entry_id:int, 
+    payload:WaitlistEntryUpdateSchema
+    ):
+    obj = get_object_or_404(
+        WaitlistEntry, 
+        id=entry_id,
+        user=request.user)
+    payload_dict = payload.dict()
+    for k,v in payload_dict.items():
+        setattr(obj, k, v)
+    obj.save()
     return obj
