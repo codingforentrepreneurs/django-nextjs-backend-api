@@ -71,3 +71,13 @@ def update_wailist_entry(request,
         setattr(obj, k, v)
     obj.save()
     return obj
+
+# http DELETE
+@router.delete("{entry_id}/delete/", response=WaitlistEntryDetailSchema, auth=helpers.api_auth_user_required)
+def delete_wailist_entry(request, entry_id:int):
+    obj = get_object_or_404(
+        WaitlistEntry, 
+        id=entry_id,
+        user=request.user)
+    obj.delete()
+    return obj
